@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun, Sayangku! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ==================================== */
+        /* GAYA DASAR & TEMA */
+        /* ==================================== */
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Latar Belakang Gradasi Pink Lembut */
+            background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
+            color: #4a148c; /* Warna Teks Ungu Tua */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95); /* Card Semi-transparan */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: fadeIn 2s ease-out;
+            max-height: 90vh; /* Batasi tinggi untuk layar kecil */
+            overflow-y: auto; /* Izinkan scroll jika konten panjang */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tombol Mulai */
+        #start-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            background-color: #e91e63; /* Pink Cerah */
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        #start-button:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+
+        /* ==================================== */
+        /* GAYA KONTEN ULANG TAHUN */
+        /* ==================================== */
+        #message-content {
+            display: none; /* Sembunyikan konten awal */
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            margin-bottom: 5px;
+            color: #d81b60; /* Merah Muda Gelap */
+        }
+        
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #880e4f;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            line-height: 1.8;
+            opacity: 0; /* Semua paragraf tersembunyi */
+            transition: opacity 1s ease-in-out;
+        }
+        
+        p.show {
+            opacity: 1;
+        }
+
+        .emoji {
+            font-size: 2.5em;
+            display: block;
+            margin: 20px 0;
+        }
+        
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            font-weight: 600;
+            color: #4a148c;
+            font-size: 1.1em;
+        }
+
+        /* GAYA KHUSUS HADIAH WA */
+        .gift-section {
+            margin-top: 40px;
+            padding: 20px;
+            border: 2px dashed #ff80ab; /* Border Imut */
+            border-radius: 15px;
+            background-color: #fff3f8; /* Background sangat muda */
+        }
+        
+        /* PERUBAHAN UTAMA DI SINI: Warna Teks lebih gelap dan tebal */
+        .gift-text {
+            font-family: 'Poppins', sans-serif; /* Ganti font agar lebih mudah dibaca */
+            font-size: 1.1em;
+            color: #4a148c; /* Ungu Gelap agar Kontras */
+            font-weight: 600; /* Lebih Tebal */
+            margin-bottom: 15px;
+            line-height: 1.5;
+            opacity: 1 !important; /* Pastikan teks ini selalu terlihat */
+        }
+
+        #wa-button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            background-color: #4CAF50; /* Hijau WhatsApp */
+            color: white;
+            border: 4px solid #81c784; /* Border hijau muda */
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #wa-button:hover {
+            background-color: #388e3c;
+            transform: scale(1.05) rotate(-3deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .love-you-text {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #d81b60;
+            display: block;
+        }
+        
+        /* ==================================== */
+        /* EFEK BALON */
+        /* ==================================== */
+        .balloon {
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            background-color: #ffc1e3;
+            border-radius: 50%;
+            bottom: -50px;
+            animation: float 10s linear infinite;
+            opacity: 0.7;
+        }
+        
+        .balloon:before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background-color: #d500f9;
+        }
+
+        /* Keyframes Balon Mengambang */
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            100% { transform: translateY(-1000px); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="welcome-screen">
+            <h1 style="font-size: 2.5em;">Hai, Cantikku!</h1>
+            <p>Ada pesan spesial ulang tahun untukmu.</p>
+            <button id="start-button">Buka Pesan 🎉</button>
+        </div>
+
+        <div id="message-content">
+            <h1>Happy Birthday, Sayang!</h1>
+            <h2>Untuk **[Nama Pacar Anda]** yang paling kucinta.</h2>
+            
+            <p id="msg-1">Hari ini adalah hari favoritku, karena hari ini dunia kedatangan malaikat kecilku. 🥺</p>
+            <p id="msg-2">Terima kasih sudah mewarnai hari-hariku yang tadinya kelabu jadi penuh *glitter* pink dan ungu! Kamu sungguh berharga. ✨</p>
+            <p id="msg-3">Aku janji, di usiamu yang baru ini, aku akan berusaha menjadi lebih baik, lebih sabar, dan lebih romantis lagi untukmu. 🌹</p>
+            <p id="msg-4">Semoga semua impianmu tercapai, dan semoga kita terus bersama, menua dengan bahagia sambil saling cubit pipi. 🥰</p>
+            
+            <span class="emoji">🎂💖🎁</span>
+            
+            <p class="signature">With all my heart, <br> **[Nama Anda]**</p>
+            
+            <div class="gift-section">
+                <p class="gift-text">
+                    kalo kamu mau minta hadiah atau minta sesuatu dari cowo mu ini pencet ajaaa yaaa tombol nyaa terusss kasih tau apaaa yanggg kamuu mauu, kalo aku bisa pasti aku turut in apaaa yangg kamuu mauu.
+                </p>
+                <a id="wa-button" 
+                   href="https://wa.me/NOMOR_WA_ANDA?text=Sayang%2C%20makasih%20banyak%20ucapan%20ultahnya%20yang%20lucu%21%20Aku%20mau%20minta%20%28sebutkan%20permintaan%20hadiah%20kamu%20di%20sini%29" 
+                   target="_blank">
+                    Pencet Tombol Ini! 🎁
+                </a>
+                <span class="love-you-text">Love you moree cantikk 🤍</span>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/v0zdcx.aac" type="audio/mpeg"> 
+        Maaf, browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+        const startButton = document.getElementById('start-button');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const messageContent = document.getElementById('message-content');
+        const messages = document.querySelectorAll('#message-content p:not(.signature, .gift-text)');
+        const signature = document.querySelector('.signature');
+        const music = document.getElementById('background-music');
+        const balloonContainer = document.querySelector('body');
+
+        // --- 1. Fungsi Animasi Pesan Bertahap ---
+        function showMessagesSequentially() {
+            let delay = 0;
+            messages.forEach((msg, index) => {
+                setTimeout(() => {
+                    msg.classList.add('show');
+                }, delay);
+                delay += 1500; // Jeda 1.5 detik antar pesan
+            });
+            
+            // Tampilkan tanda tangan dan gift-section setelah semua pesan utama muncul
+            setTimeout(() => {
+                 signature.classList.add('show');
+                 document.querySelector('.gift-section').style.opacity = 0;
+                 document.querySelector('.gift-section').style.transition = 'opacity 1s ease-in-out';
+                 // Tampilkan gift section setelah tanda tangan
+                 setTimeout(() => {
+                     document.querySelector('.gift-section').style.opacity = 1;
+                 }, 1000);
+            }, delay);
+        }
+        
+        // --- 2. Fungsi Animasi Balon ---
+        function createBalloons() {
+            for (let i = 0; i < 15; i++) { 
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.animationDelay = `${Math.random() * 10}s`;
+                balloon.style.animationDuration = `${7 + Math.random() * 5}s`; 
+                
+                const colors = ['#ff80ab', '#e040fb', '#00bcd4', '#ff8a80', '#c8e6c9'];
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                balloonContainer.appendChild(balloon);
+            }
+        }
+
+        // --- 3. Listener Tombol Mulai ---
+        startButton.addEventListener('click', () => {
+            welcomeScreen.style.display = 'none';
+            messageContent.style.display = 'block';
+            
+            music.volume = 0.4;
+            music.play().catch(error => {
+                console.log("Musik tidak dapat diputar otomatis:", error);
+            }); 
+            
+            showMessagesSequentially();
+            createBalloons();
+        });
+        
+        // --- 4. Inisialisasi DOMContentLoaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sembunyikan signature dan gift-section di awal
+            signature.style.opacity = 0;
+            document.querySelector('.gift-section').style.opacity = 0;
+            signature.style.transition = 'opacity 1s ease-in-out';
+        });
+
+    </script>
+</body>
+</html>
